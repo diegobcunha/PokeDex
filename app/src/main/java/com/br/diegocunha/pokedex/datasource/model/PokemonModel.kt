@@ -8,7 +8,7 @@ import kotlinx.parcelize.Parcelize
 
 @JsonClass(generateAdapter = true)
 data class PokemonModel(
-    @Json(name = "pokemon_v2_pokemonspecies") val pokemons: List<PokemonResult>?,
+    @Json(name = "pokemon_v2_pokemon") val pokemons: List<PokemonResult>?,
     @Json(name = "pokemon_v2_pokemon_by_pk") val pokemon: Pokemon?
 )
 
@@ -24,7 +24,6 @@ data class PokemonResponse(
 @Parcelize
 @JsonClass(generateAdapter = true)
 data class PokemonResult(
-    val name: String,
     val id: Int
 ) : Parcelable
 

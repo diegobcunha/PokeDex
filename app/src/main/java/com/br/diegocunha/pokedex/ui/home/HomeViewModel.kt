@@ -10,6 +10,6 @@ class HomeViewModel(dispatchersProvider: DispatchersProvider,
 private val api: PokeDexGraphQL): StateViewModel<List<Pokemon>>(dispatchersProvider)  {
 
     override suspend fun fetch(): GetState<List<Pokemon>> {
-        return api.getPokemonDetail()
+        return api.getPokemonDetail(0, 10)
     }
 }

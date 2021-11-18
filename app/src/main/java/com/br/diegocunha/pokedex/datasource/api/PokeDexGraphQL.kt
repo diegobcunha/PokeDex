@@ -12,8 +12,8 @@ import com.squareup.moshi.Types
 
 class PokeDexGraphQL(private val apolloClient: ApolloClient) {
 
-    suspend fun listOfPokemons(): GetState<List<PokemonResult>> {
-        val query = SamplePokeAPIqueryQuery()
+    suspend fun listOfPokemons(offset: Int, limit: Int): GetState<List<PokemonResult>> {
+        val query = SamplePokeAPIqueryQuery(offset = offset, limit = limit)
         val type = Types.newParameterizedType(GraphQLResponse::class.java, PokemonModel::class.java)
         return apolloClient.queryState<SamplePokeAPIqueryQuery.Data, PokemonModel>(query, type)
             .map {
@@ -21,11 +21,11 @@ class PokeDexGraphQL(private val apolloClient: ApolloClient) {
             }
     }
 
-    suspend fun getPokemonDetail(): GetState<List<Pokemon>> {
+    suspend fun getPokemonDetail(offset: Int, limit: Int): GetState<List<Pokemon>> {
         val type = Types.newParameterizedType(
             GraphQLResponse::class.java, PokemonModel::class.java
         )
-        val listOfPokemons = listOfPokemons().map { currentPokemon ->
+        val listOfPokemons = listOfPokemons(offset, limit).map { currentPokemon ->
             currentPokemon?.map { current ->
                 val query = PokemonDetailQuery(current.id)
                 try {
@@ -42,7 +42,5 @@ class PokeDexGraphQL(private val apolloClient: ApolloClient) {
         }
 
         return listOfPokemons
-
-
     }
 }

@@ -1,6 +1,5 @@
-query samplePokeAPIquery {
-    pokemon_v2_pokemonspecies {
-        name
+query samplePokeAPIquery($limit: Int!, $offset: Int!) {
+    pokemon_v2_pokemon(limit: $limit, offset: $offset) {
         id
     }
 }
