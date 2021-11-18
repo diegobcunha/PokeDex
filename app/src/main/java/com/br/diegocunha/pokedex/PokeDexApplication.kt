@@ -3,6 +3,7 @@ package com.br.diegocunha.pokedex
 import android.app.Application
 import com.br.diegocunha.pokedex.coroutines.coroutineModule
 import com.br.diegocunha.pokedex.datasource.dataSourceModule
+import com.br.diegocunha.pokedex.ui.uiModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -19,7 +20,8 @@ class PokeDexApplication: Application() {
             modules(
                 listOf(
                     coroutineModule,
-                    dataSourceModule
+                    dataSourceModule,
+                    uiModule
                 )
             )
         }

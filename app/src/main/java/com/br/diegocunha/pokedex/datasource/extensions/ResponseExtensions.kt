@@ -1,11 +1,13 @@
 package com.br.diegocunha.pokedex.datasource.extensions
 
-import retrofit2.Response
+import com.apollographql.apollo.api.Response
+
 
 fun <T> Response<T>.getOrThrow(): T? {
-    return if (this.errorBody() != null) {
-        throw throw Exception(errorBody()?.string())
+    val errorsList = errors
+    return if (!errorsList.isNullOrEmpty()) {
+        throw Exception(errorsList.first().message)
     } else {
-        this.body()
+        data
     }
 }

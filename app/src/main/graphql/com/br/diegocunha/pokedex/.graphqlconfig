@@ -1,0 +1,15 @@
+{
+  "name": "PokeDex API Schema",
+  "schemaPath": "/schema.json",
+  "extensions": {
+    "endpoints": {
+      "Dev GraphQL Endpoint": {
+        "url": "https://beta.pokeapi.co/graphql/v1beta",
+        "headers": {
+          "user-agent": "JS GraphQL"
+        },
+        "introspect": false
+      }
+    }
+  }
+}

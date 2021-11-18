@@ -5,6 +5,11 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import kotlinx.parcelize.Parcelize
 
+
+@JsonClass(generateAdapter = true)
+data class PokemonModel(
+    val pokemon_v2_pokemonspecies: List<PokemonResult>
+)
 @Parcelize
 @JsonClass(generateAdapter = true)
 data class PokemonResponse(
@@ -18,7 +23,7 @@ data class PokemonResponse(
 @JsonClass(generateAdapter = true)
 data class PokemonResult(
     val name: String,
-    val url: String
+    val id: String
 ) : Parcelable
 
 @Parcelize

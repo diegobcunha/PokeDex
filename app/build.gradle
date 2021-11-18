@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'kotlin-parcelize'
+    id 'com.apollographql.apollo'
 }
 
 android {
@@ -20,7 +21,7 @@ android {
             useSupportLibrary true
         }
 
-        buildConfigField "String", "BASE_URL", "\"https://pokeapi.co/api/v2/\""
+        buildConfigField "String", "BASE_URL", "\"https://beta.pokeapi.co/graphql/v1beta\""
     }
 
     buildTypes {
@@ -62,8 +63,11 @@ dependencies {
     implementation 'androidx.paging:paging-compose:1.0.0-alpha14'
 
     //api
-    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    implementation 'com.squareup.retrofit2:converter-moshi:2.9.0'
+    // The core runtime dependencies
+    implementation "com.apollographql.apollo:apollo-runtime:$apollo_version"
+    // Coroutines extensions for easier asynchronicity handling
+    implementation "com.apollographql.apollo:apollo-coroutines-support:$apollo_version"
+
     implementation 'com.squareup.moshi:moshi-kotlin:1.12.0'
     kapt("com.squareup.moshi:moshi-kotlin-codegen:1.12.0")
     implementation 'com.squareup.okhttp3:okhttp:4.9.2'
@@ -97,4 +101,8 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
+}
+
+apollo {
+    generateKotlinModels.set(true)
 }

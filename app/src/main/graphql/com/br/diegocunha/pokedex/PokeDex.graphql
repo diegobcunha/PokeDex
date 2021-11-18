@@ -1,0 +1,6 @@
+query samplePokeAPIquery {
+    pokemon_v2_pokemonspecies {
+        name
+        id
+    }
+}

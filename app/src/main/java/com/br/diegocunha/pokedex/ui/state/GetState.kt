@@ -1,6 +1,8 @@
 package com.br.diegocunha.pokedex.ui.state
 
 import androidx.compose.runtime.Immutable
+import com.br.diegocunha.pokedex.datasource.model.PokemonModel
+import com.br.diegocunha.pokedex.datasource.model.PokemonResult
 
 @JvmInline
 @SuppressWarnings("unchecked_cast")
@@ -46,6 +48,17 @@ value class GetState<out T> private constructor(val value: Any) {
 
     override fun toString(): String {
         return value.toString()
+    }
+
+    inline fun <R> map(mapBlock: (T?) -> R?): GetState<R> {
+        return when (value) {
+            is GetInitial -> initial()
+            is GetFailure -> failure(GetFailure(value.throwable))
+            else -> {
+                val r = checkNotNull(mapBlock(success))
+                success(r)
+            }
+        }
     }
 
     /**
