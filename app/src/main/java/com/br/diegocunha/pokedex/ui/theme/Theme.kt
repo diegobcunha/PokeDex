@@ -2,43 +2,37 @@ package com.br.diegocunha.pokedex.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.darkColors
-import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import com.br.diegocunha.pokedex.ui.theme.PokemonTheme
+import com.br.diegocunha.pokedex.ui.theme.PokemonTheme.material
 
-private val DarkColorPalette = darkColors(
-    primary = Purple200,
-    primaryVariant = Purple700,
-    secondary = Teal200
-)
-
-private val LightColorPalette = lightColors(
-    primary = Purple500,
-    primaryVariant = Purple700,
-    secondary = Teal200
-
-    /* Other default colors to override
-    background = Color.White,
-    surface = Color.White,
-    onPrimary = Color.White,
-    onSecondary = Color.Black,
-    onBackground = Color.Black,
-    onSurface = Color.Black,
-    */
-)
 
 @Composable
-fun PokeDexTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable() () -> Unit) {
-    val colors = if (darkTheme) {
-        DarkColorPalette
-    } else {
-        LightColorPalette
-    }
+fun PokeDexAppTheme(
+    colors: PokeDexColors = defaultColorsBySystem(),
+    typography: PokeDexTypography = PokeDexTypography.default,
+    content: @Composable() () -> Unit
+) {
 
-    MaterialTheme(
-        colors = colors,
-        typography = Typography,
-        shapes = Shapes,
-        content = content
-    )
+    CompositionLocalProvider(
+        LocalPokeDexColors provides colors,
+        LocalPokeDexTypography provides typography,
+    ) {
+        MaterialTheme(
+            colors = PokemonTheme.colors.material,
+            typography = PokemonTheme.typography.material,
+            shapes = Shapes,
+            content = content
+        )
+    }
+}
+
+@Composable
+private fun defaultColorsBySystem(): PokeDexColors {
+    return if(isSystemInDarkTheme()) {
+        PokeDexColors.darkMode
+    } else {
+        PokeDexColors.lightMode
+    }
 }
