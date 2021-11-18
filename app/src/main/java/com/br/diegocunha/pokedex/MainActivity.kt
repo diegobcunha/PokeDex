@@ -8,13 +8,13 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import com.br.diegocunha.pokedex.ui.theme.PokeDexTheme
+import com.br.diegocunha.pokedex.ui.theme.PokeDexAppTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            PokeDexTheme {
+            PokeDexAppTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
                     Greeting("Android")
@@ -32,7 +32,7 @@ fun Greeting(name: String) {
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
-    PokeDexTheme {
+    PokeDexAppTheme {
         Greeting("Android")
     }
 }
