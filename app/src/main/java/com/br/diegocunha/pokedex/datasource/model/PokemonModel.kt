@@ -8,8 +8,10 @@ import kotlinx.parcelize.Parcelize
 
 @JsonClass(generateAdapter = true)
 data class PokemonModel(
-    val pokemon_v2_pokemonspecies: List<PokemonResult>
+    @Json(name = "pokemon_v2_pokemonspecies") val pokemons: List<PokemonResult>?,
+    @Json(name = "pokemon_v2_pokemon_by_pk") val pokemon: Pokemon?
 )
+
 @Parcelize
 @JsonClass(generateAdapter = true)
 data class PokemonResponse(
@@ -23,7 +25,7 @@ data class PokemonResponse(
 @JsonClass(generateAdapter = true)
 data class PokemonResult(
     val name: String,
-    val id: String
+    val id: Int
 ) : Parcelable
 
 @Parcelize
@@ -46,10 +48,10 @@ data class Stat(
 @Parcelize
 @JsonClass(generateAdapter = true)
 data class Sprites(
-    @Json(name = "back_default") val backDefault: String,
-    @Json(name = "back_shiny") val backShiny: String,
-    @Json(name = "front_default") val frontDefault: String,
-    @Json(name = "front_shiny") val frontShiny: String
+    @Json(name = "back_default") val backDefault: String?,
+    @Json(name = "back_shiny") val backShiny: String?,
+    @Json(name = "front_default") val frontDefault: String?,
+    @Json(name = "front_shiny") val frontShiny: String?
 ) : Parcelable
 
 @Parcelize
@@ -59,3 +61,15 @@ data class Stats(
     val effort: Int,
     val stat: Stat
 ) : Parcelable
+
+@JsonClass(generateAdapter = true)
+data class Pokemon(
+    val name: String,
+    val height: Int,
+    val sprites: List<Sprites>
+) {
+}
+
+fun Pokemon.toList(): List<Pokemon> {
+    return listOf(this)
+}

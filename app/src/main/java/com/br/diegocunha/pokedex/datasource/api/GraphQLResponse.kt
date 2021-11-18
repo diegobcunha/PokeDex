@@ -42,11 +42,11 @@ suspend inline fun <D : Operation.Data, T> Response<D>.asResponse(type: Type): G
 /**
  * Returns the graphql data from the response or throws if has errors
  */
-fun <T> GraphQLResponse<T>.getOrThrow(): T? {
+fun <T> GraphQLResponse<T>.getOrThrow(): T {
     return if (errors != null) {
         throw createResponseException()
     } else {
-        data
+        checkNotNull(data)
     }
 }
 

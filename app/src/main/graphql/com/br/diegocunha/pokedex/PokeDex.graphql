@@ -4,3 +4,15 @@ query samplePokeAPIquery {
         id
     }
 }
+
+
+query PokemonDetail($id: Int!) {
+    pokemon_v2_pokemon_by_pk(id: $id) {
+        name
+        height
+        is_default
+        sprites: pokemon_v2_pokemonsprites{
+            sprites
+        }
+    }
+}
