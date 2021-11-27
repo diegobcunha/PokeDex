@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">PokeDex</string>
+    <string name="templates_error_general">Ops! Verifique sua conexão e tente novamente.</string>
+    <string name="resources_error_default_title">Oops, algo deu errado</string>
+    <string name="resources_try_again">Tentar Novamente</string>
+
 </resources>

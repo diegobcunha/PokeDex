@@ -61,6 +61,26 @@ value class GetState<out T> private constructor(val value: Any) {
         }
     }
 
+    inline fun <R> onSuccess(block: (T) -> Unit): GetState<T> {
+        if (currentStatus() == GetStatus.SUCCESS) {
+            block(checkNotNull(getOrNull()))
+        }
+
+        return this
+    }
+
+    inline fun <R> onFailure(block: (Throwable?) -> Unit): GetState<T> {
+        if(currentStatus() == GetStatus.FAILURE) {
+            block(getThrowableOrNull())
+        }
+
+        return this
+    }
+
+    fun getOrNull() = value as? T
+
+    fun getThrowableOrNull() = failure.throwable
+
     /**
      * Enabling only three ways to instantiate a DefaultGetState
      */

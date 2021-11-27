@@ -10,7 +10,8 @@ data class PokeDexColors(
     val context: GroupContext,
     val base: GroupBase,
     val isLight: Boolean,
-    val element: GroupElement
+    val element: GroupElement,
+    val status: GroupStatus
 ) {
     companion object : Mode<PokeDexColors> {
         override val lightMode: PokeDexColors = PokeDexColors(
@@ -18,6 +19,7 @@ data class PokeDexColors(
             context = ThemeColors.lightMode,
             base =  GroupBase.lightMode,
             element = GroupElement.lightMode,
+            status = GroupStatus.lightMode,
             isLight = true
         )
 
@@ -26,6 +28,7 @@ data class PokeDexColors(
             context = ThemeColors.darkMode,
             base = GroupBase.darkMode,
             element = GroupElement.darkMode,
+            status = GroupStatus.darkMode,
             isLight = false
         )
     }
@@ -173,6 +176,41 @@ data class GroupElement(
             overImage = Color(0xFFFFFFFF),
             onError = Color(0xFFF73939),
             onSuccess = Color(0xFF16B690)
+        )
+    }
+}
+
+@Immutable
+data class GroupStatus(
+    val positive: Color,
+    val alert: Color,
+    val negative: Color,
+    val info: Color,
+    val positiveBackground: Color,
+    val alertBackground: Color,
+    val negativeBackground: Color,
+    val infoBackground: Color
+) {
+    internal companion object : Mode<GroupStatus> {
+        override val lightMode = GroupStatus(
+            positive = Color(0xFF004C3A),
+            alert = Color(0xFF784D0B),
+            negative = Color(0xFF800D0D),
+            info = Color(0xFF101C8B),
+            positiveBackground = Color(0xFFA0F4E0),
+            alertBackground = Color(0xFFFBD1A3),
+            negativeBackground = Color(0xFFF7A1A1),
+            infoBackground = Color(0xFFB3BAF4)
+        )
+        override val darkMode = GroupStatus(
+            positive = Color(0xFFB0EEDF),
+            alert = Color(0xFFFBD1A3),
+            negative = Color(0xFFFCB6B6),
+            info = Color(0xFFC1CDF0),
+            positiveBackground = Color(0xFF00664E),
+            alertBackground = Color(0xFF815512),
+            negativeBackground = Color(0xFF940909),
+            infoBackground = Color(0xFF1642C5)
         )
     }
 }

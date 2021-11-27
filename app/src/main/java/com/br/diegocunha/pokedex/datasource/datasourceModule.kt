@@ -3,6 +3,7 @@ package com.br.diegocunha.pokedex.datasource
 import com.apollographql.apollo.ApolloClient
 import com.br.diegocunha.pokedex.BuildConfig
 import com.br.diegocunha.pokedex.datasource.api.PokeDexGraphQL
+import com.br.diegocunha.pokedex.datasource.repository.PokemonRepository
 import java.util.concurrent.TimeUnit
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -32,5 +33,5 @@ val dataSourceModule = module {
 
     factory { PokeDexGraphQL(get()) }
 
-
+    factory { PokemonRepository(get()) }
 }
