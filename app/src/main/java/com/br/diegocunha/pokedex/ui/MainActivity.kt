@@ -18,8 +18,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.br.diegocunha.pokedex.ui.components.CardLoadingComponent
 import com.br.diegocunha.pokedex.ui.components.InfiniteListHandler
+import com.br.diegocunha.pokedex.ui.components.PlaceholderFullScreen
 import com.br.diegocunha.pokedex.ui.home.HomeViewModel
+import com.br.diegocunha.pokedex.ui.state.GetCrossfade
 import com.br.diegocunha.pokedex.ui.state.GetStatus
 import com.br.diegocunha.pokedex.ui.theme.PokeDexAppTheme
 import org.koin.androidx.compose.getViewModel
@@ -43,6 +46,16 @@ fun Greeting(name: String) {
     val viewModel = getViewModel<HomeViewModel>()
     val viewState by viewModel.stateFlow.collectAsState()
 
+    GetCrossfade(state = viewState,
+        initial = {
+            PlaceholderFullScreen {
+                CardLoadingComponent()
+            }
+        },
+        failure = {
+
+        },
+        success = {})
     when (viewState.currentStatus()) {
         GetStatus.SUCCESS -> {
             val listState = rememberLazyListState()
